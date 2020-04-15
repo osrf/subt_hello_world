@@ -8,7 +8,7 @@ The SubT Virtual Testbed is based on the [Ignition Gazebo](https://ignitionrobot
 It allows competitors to simulate teams of robots in different subterranean environments.
 Powered by competitors' autonomy algorithms, the robot team must explore as much of the underground environment as possible and report the locations of various artifacts.
 
-While prototyping and experimentation happen on a local developer's computer, all solutions must be submitted to CloudSim (the cloud-based simulation environment discussed [here](https://bitbucket.org/osrf/subt/wiki/cloudsim_architecture)) to join the leaderboards and compete for the prize money.
+While prototyping and experimentation happen on a local developer's computer, all solutions must be submitted to CloudSim (the cloud-based simulation environment discussed [here](https://github.com/osrf/subt/wiki/cloudsim_architecture)) to join the leaderboards and compete for the prize money.
 
 Through a series of posts, we will go through the process of building and submitting a competition solution.
 
@@ -20,10 +20,10 @@ The latest SubT Virtual Testbed release is always hosted on [DockerHub](https://
 
 ### Installing Docker
 
-Before installing docker, take a look at the [system requirements](https://bitbucket.org/osrf/subt/wiki/system_requirements).
+Before installing docker, take a look at the [system requirements](https://github.com/osrf/subt/wiki/system_requirements).
 The simulator relies on having a hardware-accelerated graphics card in order to do rendering for the user interface as well as simulated sensors.
 
-If you don't already have `docker` installed on your system, then it's best to follow the installation instructions in the [Installation Wiki](https://bitbucket.org/osrf/subt/wiki/tutorials/SystemSetupDockerInstall).
+If you don't already have `docker` installed on your system, then it's best to follow the installation instructions in the [Installation Wiki](https://github.com/osrf/subt/wiki/tutorials/SystemSetupDockerInstall).
 It is important to note that you need `docker` and `nvidia-docker` in order to get the simulation environment to work.
 
 
@@ -118,7 +118,7 @@ To expand on the arguments of this script:
 * `cave_circuit.ign` - the Ignition-launch file for the cave simulation
 * `worldName` - the name of the world to launch (currently, there are three simple cave variants)
 * `robotName` - the name of the first robot performer in the team
-* `robotConfig` - the configuration of the first robot performer in the team (robots can be found on the [SubT Tech Repo](https://subtchallenge.world/openrobotics/fuel/collections/SubT%20Tech%20Repo) with details on the [Robot Wiki](https://bitbucket.org/osrf/subt/wiki/robots))
+* `robotConfig` - the configuration of the first robot performer in the team (robots can be found on the [SubT Tech Repo](https://subtchallenge.world/openrobotics/fuel/collections/SubT%20Tech%20Repo) with details on the [Robot Wiki](https://github.com/osrf/subt/wiki/robots))
 
 Once the simulation environment is loaded, you should be presented with a window like this:
 
@@ -263,7 +263,7 @@ The teleoperating node is made to work with the team of robots.
 With the simulator environment launched with the `X1` configuration, as above, we want to control the `X1` robot.
 To do this, press the *B* button on the controller to switch to `X1`, press and hold the *left shoulder* button to engage the safety switch, and drive with the *left joystick*
 
-More detailed information on how to use the controller to control robots in the SubT Simulator can be found [here](https://bitbucket.org/osrf/subt/wiki/tutorials/ExampleSetup).
+More detailed information on how to use the controller to control robots in the SubT Simulator can be found [here](https://github.com/osrf/subt/wiki/tutorials/ExampleSetup).
 
 #### Keyboard Teleoperation
 
@@ -288,6 +288,6 @@ In this post, we have seen how to teleoperate a robot platform using the SubT Vi
 
 If you like to participate or explore more, here are some helpful resources:
 * [SubT Virtual Portal](https://subtchallenge.world/home): hosts competition information, registration, SubT Tech Repo, CloudSim submissions, and leaderboards
-* [SubT Virtual Testbed Repository](https://bitbucket.org/osrf/subt/wiki/Home): hosts source code for the testbed
-* [SubT API Wiki](https://bitbucket.org/osrf/subt/wiki/api): enumerates ROS topics and services in the SubT Virtual Testbed
-* [SubT Robot Wiki](https://bitbucket.org/osrf/subt/wiki/robots): enumerates the list of pre-made robot models in the SubT Tech Repo for the Virtual Competition
+* [SubT Virtual Testbed Repository](https://github.com/osrf/subt/wiki/Home): hosts source code for the testbed
+* [SubT API Wiki](https://github.com/osrf/subt/wiki/api): enumerates ROS topics and services in the SubT Virtual Testbed
+* [SubT Robot Wiki](https://github.com/osrf/subt/wiki/robots): enumerates the list of pre-made robot models in the SubT Tech Repo for the Virtual Competition

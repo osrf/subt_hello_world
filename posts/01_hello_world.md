@@ -10,6 +10,7 @@ Powered by competitors' autonomy algorithms, the robot team must explore as much
 
 While prototyping and experimentation happen on a local developer's computer, all solutions must be submitted to CloudSim (the cloud-based simulation environment discussed [here](https://github.com/osrf/subt/wiki/cloudsim_architecture)) to join the leaderboards and compete for the prize money.
 
+
 Through a series of posts, we will go through the process of building and submitting a competition solution.
 
 ## Hello (Subterranean) World!
@@ -20,10 +21,12 @@ The latest SubT Virtual Testbed release is always hosted on [DockerHub](https://
 
 ### Installing Docker
 
+
 Before installing docker, take a look at the [system requirements](https://github.com/osrf/subt/wiki/system_requirements).
 The simulator relies on having a hardware-accelerated graphics card in order to do rendering for the user interface as well as simulated sensors.
 
 If you don't already have `docker` installed on your system, then it's best to follow the installation instructions in the [Installation Wiki](https://github.com/osrf/subt/wiki/tutorials/SystemSetupDockerInstall).
+
 It is important to note that you need `docker` and `nvidia-docker` in order to get the simulation environment to work.
 
 
@@ -99,7 +102,7 @@ Docker itself has many command-line options for configuration, so the developmen
 Clone the repository:
 
 ```
-hg clone ssh://hg@bitbucket.org/osrf/subt
+git clone https://github.com/osrf/subt.git
 ```
 
 Then, to execute the simulation environment, run:
@@ -263,6 +266,7 @@ The teleoperating node is made to work with the team of robots.
 With the simulator environment launched with the `X1` configuration, as above, we want to control the `X1` robot.
 To do this, press the *B* button on the controller to switch to `X1`, press and hold the *left shoulder* button to engage the safety switch, and drive with the *left joystick*
 
+
 More detailed information on how to use the controller to control robots in the SubT Simulator can be found [here](https://github.com/osrf/subt/wiki/tutorials/ExampleSetup).
 
 #### Keyboard Teleoperation
@@ -291,3 +295,4 @@ If you like to participate or explore more, here are some helpful resources:
 * [SubT Virtual Testbed Repository](https://github.com/osrf/subt/wiki/Home): hosts source code for the testbed
 * [SubT API Wiki](https://github.com/osrf/subt/wiki/api): enumerates ROS topics and services in the SubT Virtual Testbed
 * [SubT Robot Wiki](https://github.com/osrf/subt/wiki/robots): enumerates the list of pre-made robot models in the SubT Tech Repo for the Virtual Competition
+

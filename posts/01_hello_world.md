@@ -296,3 +296,6 @@ If you like to participate or explore more, here are some helpful resources:
 * [SubT API Wiki](https://github.com/osrf/subt/wiki/api): enumerates ROS topics and services in the SubT Virtual Testbed
 * [SubT Robot Wiki](https://github.com/osrf/subt/wiki/robots): enumerates the list of pre-made robot models in the SubT Tech Repo for the Virtual Competition
 
+---
+
+**Distribution Statement "A" (Approved for Public Release, Distribution Unlimited)**

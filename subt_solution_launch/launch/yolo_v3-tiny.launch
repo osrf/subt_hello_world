@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  
+  <!-- Use YOLOv3 -->
+  <arg name="network_param_file"         default="$(find subt_solution_launch)/config/darknet_ros/yolov3-tiny.yaml"/>
+  <arg name="image" default="/X1/front/image_raw" />
+  <!-- <arg name="image" default="/validator/front/image_raw" /> -->
+
+  <!-- Include main launch file -->
+  <include file="$(find darknet_ros)/launch/darknet_ros.launch">
+    <arg name="network_param_file"    value="$(arg network_param_file)"/>
+    <arg name="image" value="$(arg image)" />
+
+    <arg name="yolo_weights_path"     value="$(find subt_solution_launch)/config/darknet_ros"/>
+    <arg name="yolo_config_path"      value="$(find subt_solution_launch)/config/darknet_ros"/>
+  </include>
+
+</launch>

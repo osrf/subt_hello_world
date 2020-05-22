@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launch>
+  <!-- The name/namespace of this robot -->
+  <arg name="name"/>
+
+  <node pkg="subt_solution_launch" type="simple_solution.py" name="simple_solution" output="screen">
+    <param name="timeout" value="120"/>
+  </node>
+
+  <group ns="$(arg name)">
+    <!-- Cartographer setup -->
+    <include file="$(find subt_solution_launch)/launch/cartographer.launch">
+      <arg name="name" value="$(arg name)"/>
+      <arg name="mode" value="3d"/>
+      <arg name="type" value="x1"/>
+    </include>
+  </group>
+</launch>

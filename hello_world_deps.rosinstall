@@ -1,0 +1,13 @@
+repositories:
+  darknet_ros:
+    type: git
+    url: https://github.com/leggedrobotics/darknet_ros.git
+    version: master
+  subt:
+    type: git
+    url: https://github.com/osrf/subt.git
+    version: master
+  m-explore:
+    type: git
+    url: https://github.com/hrnr/m-explore.git
+    version: melodic-devel

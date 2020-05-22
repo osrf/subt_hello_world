@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>subt_solution_launch</name>
+  <version>0.0.1</version>
+  <description>Launch/bringup files for Open Robotics SubT Solution</description>
+
+  <maintainer email="michael@openrobotics.org">Michael Carroll</maintainer>
+
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>roslaunch</depend>
+  <depend>cartographer_ros</depend>
+  <depend>darknet_ros</depend>
+</package>

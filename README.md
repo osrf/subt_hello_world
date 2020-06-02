@@ -12,6 +12,8 @@ This repository holds a set of quick-start hello world tutorials for the DARPA S
 *Current Tutorials*
 * [Tutorial 1: Hello World](https://github.com/osrf/subt_hello_world/blob/master/posts/01_hello_world.md)
 * [Tutorial 2: Docker & SLAM](https://github.com/osrf/subt_hello_world/blob/master/posts/02_docker_and_slam.md)
+* [Tutorial 3: Robot Perception](https://github.com/osrf/subt_hello_world/blob/master/posts/03_perception.md)
+
 
 *Official SubT Resources*
 * [The SubT Virtual Portal](https://www.subtchallenge.world/)

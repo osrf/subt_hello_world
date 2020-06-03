@@ -5,7 +5,6 @@
   <!-- Use YOLOv3 -->
   <arg name="network_param_file"         default="$(find subt_solution_launch)/config/darknet_ros/yolov3-tiny.yaml"/>
   <arg name="image" default="/X1/front/image_raw" />
-  <!-- <arg name="image" default="/validator/front/image_raw" /> -->
 
   <!-- Include main launch file -->
   <include file="$(find darknet_ros)/launch/darknet_ros.launch">

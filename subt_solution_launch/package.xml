@@ -13,4 +13,15 @@
   <depend>roslaunch</depend>
   <depend>cartographer_ros</depend>
   <depend>darknet_ros</depend>
+  <depend>darknet_ros_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>message_filters</depend>
+  <depend>pcl_conversions</depend>
+  <depend>pcl_ros</depend>
+  <depend>roscpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>subt_communication_broker</depend>
+  <depend>subt_ign</depend>
+  <depend>subt_msgs</depend>
+  <depend>tf2_ros</depend>
 </package>

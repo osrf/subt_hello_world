@@ -227,7 +227,6 @@ $ cat launch/yolo_v3-tiny.launch
   <!-- Use YOLOv3 -->
   <arg name="network_param_file"         default="$(find subt_solution_launch)/config/darknet_ros/yolov3-tiny.yaml"/>
   <arg name="image" default="/X1/front/image_raw" />
-  <!-- <arg name="image" default="/validator/front/image_raw" /> -->
 
   <!-- Include main launch file -->
   <include file="$(find darknet_ros)/launch/darknet_ros.launch">
@@ -252,6 +251,7 @@ Run our modified launch file instead:
 $ roslaunch subt_solution_launch yolo_v3-tiny.launch
 ```
 
+Re-start the simulator as well.
 You should now see some output in the terminal window with frame rate and detected object information (as of now, we have not detected any artifacts in the environment, so the `objects` output will probably be empty).
 If you still see a _waiting for image_ message, make sure you have a SubT Simulator running.
 You should also see a `YOLO V3` GUI window, showing the output of the camera along with any objects that are detected in the frame:
@@ -332,7 +332,7 @@ The [SubT Virtual Testbed API](https://github.com/osrf/subt/wiki/api#artifacts) 
 We've gone ahead and implemented how to use this service in the `find_artifact_origin.cpp` file, which is in the `subt_solution_launch/src` directory.
 Let's take a look at some of the code:
 
-```
+```c++
 // set up service call
 ros::ServiceClient client = nh.serviceClient<subt_msgs::PoseFromArtifact>(service_name);
 subt_msgs::PoseFromArtifact srv;
@@ -348,7 +348,7 @@ if (!tf_buffer.canTransform(map_frame, base_link_frame, ros::Time(0), ros::Durat
 First, we make make sure that the map frame from Cartographer is being published.
 If this frame is not available after 5 seconds, the node shuts down because we don't have all of the frames that we need in order to calculate the `X1/map -> artifact origin` transform.
 
-```
+```c++
 // call service and save transforms
 if (client.call(srv))
 {
@@ -360,7 +360,7 @@ if (client.call(srv))
 We then call the service. This will give us the `artifact origin -> X1` transform (`X1` is analogous to `base_link` in this case), but we actually want the `X1 -> artifact origin` transform so that we can have the full transform tree of `X1/Map -> X1/Odom -> X1 -> artifact origin` (for more information on TF trees, see [REP 105](https://www.ros.org/reps/rep-0105.html)).
 So, in order to obtain the `X1 -> artifact origin` transform, we invert the transform we received from the service call.
 
-```
+```c++
 // save static transfrom between map->artifact_origin
 try
 {
@@ -418,7 +418,7 @@ Once we know where the object is with respect to the camera (`camera -> object` 
 
 We've implemented the centroid calculation from a given detection and its corresponding point cloud scan in `subt_solution_launch/src/artifact_reporter.cpp`. Let's go over the relevant parts of the code:
 
-```
+```c++
 // when darknet detects an object, we need the corresponding point cloud data from the RGBD camera
 // so that we can determine the location of this object
 message_filters::Subscriber<sensor_msgs::PointCloud2> pc_sub(nh, rgbd_pc_topic, 1);
@@ -432,7 +432,7 @@ In order to do this, we use a [time synchronizer](https://wiki.ros.org/message_f
 Whenever Darknet detects an object, the detection and its corresponding point cloud data will be passed to the `ProcessDetection` method, which handles all of the perception.
 Let's see what happens inside this method call.
 
-```
+```c++
 void ProcessDetection(
   const sensor_msgs::PointCloud2::ConstPtr & cloud_msg,
   const darknet_ros_msgs::BoundingBoxes::ConstPtr & bb_msg,
@@ -456,7 +456,7 @@ void ProcessDetection(
     auto tf_stamped = ToTransformStamped(centroid, camera_frame, object_frame);
     auto scoring_pose = tf_buffer.transform<geometry_msgs::PoseStamped>(
       centroid, artifact_origin_frame, ros::Duration(1.0));
-    
+
     artifact_to_report.type = subt::ArtifactType::TYPE_BACKPACK;
     artifact_to_report.location.x = scoring_pose.pose.position.x;
     artifact_to_report.location.y = scoring_pose.pose.position.y;
@@ -488,7 +488,7 @@ This code can be modified to save more than just the most recently found artifac
 We used a `struct` to define an artifact and defined a global artifact variable that represents the most recently found artifact earlier in this file (see the code snippet below).
 As a reminder, this code is just a starting point; modify it as you wish to produce your own solution!
 
-```
+```c++
 struct Artifact
 {
   subt::ArtifactType type;
@@ -508,7 +508,7 @@ In fact, as the distance between the robot and the base station increases, the p
 
 Let's go over how we implemented the artifact reporting framework discussed in the API. This code is also in `subt_solution_launch/src/artifact_reporter.cpp`.
 
-```
+```c++
 void BaseStationCallback(
   const std::string & srcAddress,
   const std::string & dstAddress,
@@ -524,7 +524,7 @@ In order to communicate with the base station, we must connect to it first.
 When you connect to the base station through `bind`, you must associate a callback with it.
 The callback we used is based on the information given in the [API](https://github.com/osrf/subt/wiki/api#artifacts).
 
-```
+```c++
 // found artifacts will be attempted to be sent periodically through a timer
 ros::Timer timer = nh.createTimer(ros::Duration(1.0), boost::bind(&ReportArtifacts, _1, boost::ref(commsClient)));
 
@@ -643,4 +643,4 @@ data: 1
 
 ## Conclusion and Next Steps
 
-Congratulations! You now have a robot with a full SLAM and perception stack. Our next lesson will show you how to use this SLAM and perception stack for autonomous navigation. 
+Congratulations! You now have a robot with a full SLAM and perception stack. Our next lesson will show you how to use this SLAM and perception stack for autonomous navigation.

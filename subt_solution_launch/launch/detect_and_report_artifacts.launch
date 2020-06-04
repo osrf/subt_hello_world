@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <!-- The name/namespace of this robot -->
+  <arg name="name"/>
+
+  <group ns="$(arg name)">
+    <!-- Cartographer setup -->
+    <include file="$(find subt_solution_launch)/launch/cartographer.launch">
+      <arg name="name" value="$(arg name)"/>
+      <arg name="mode" value="3d"/>
+      <arg name="type" value="x1"/>
+    </include>
+
+    <node pkg="subt_solution_launch" type="artifact_origin_finder" name="artifact_origin_finder">
+      <param name="robot_name" value="$(arg name)" />
+    </node>
+
+    <node pkg="subt_solution_launch" type="artifact_reporter" name="artifact_reporter">
+      <param name="robot_name" value="$(arg name)" />
+    </node>
+  </group>
+
+  <include file="$(find subt_solution_launch)/launch/yolo_v3-tiny.launch" />
+</launch>

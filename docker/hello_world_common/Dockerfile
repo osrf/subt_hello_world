@@ -30,7 +30,7 @@ RUN apt-get -qq update && apt-get -q -y install \
   python-rosinstall \
   python-rosinstall-generator \
   python-wstool \
-  python-vcstool \
+  python3-vcstool \
   python3-colcon-common-extensions \
   ros-melodic-desktop \
   ros-melodic-teleop-twist-keyboard \

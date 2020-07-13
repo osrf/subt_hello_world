@@ -10,7 +10,7 @@ navigation in place, it should be possible to build higher-level logic that
 allows to explore deep into the subterranean environment while coordinating
 between multiple robot platforms.
 
-## Overview of Navigation 
+## Overview of Navigation
 
 Several components must be in place to successfully navigate through an unknown environment:
 
@@ -36,7 +36,7 @@ planners has its own costmap to track the state of the environment around the
 robot. The _global_ costmap is typically larger than the _local_ costmap and
 tracks space on a longer horizon, while the _local_ costmap is typically
 smaller, updates more frequently, and may be higher resolution than the
-_global_ costmap. 
+_global_ costmap.
 
 Since Cartographer (from the [SLAM blog post](https://github.com/osrf/subt_hello_world/blob/master/posts/02_docker_and_slam.md)) set up our
 robot's coordinate frames, we can jump straight into configuring the costmap
@@ -48,7 +48,7 @@ A few notes:
 * We will use the robot's  LIDAR sensor to populate the data in the costmaps.
 * The global costmap's coordinate frame (defined in `costmap_global.yaml`) is `X1/map`, which means that global path planning will occur in the map frame (provided by Cartographer from our previous blog post).
 * The local costmap's coordinate frame (defined in `costmap_local.yaml`) is `X1/odom`, which means that local
-  path planning will occur in the odometry frame of the robot (this is also 
+  path planning will occur in the odometry frame of the robot (this is also
   provided by Cartographer).
 * The vehicle footprint in `costmap_common.yaml` needs to match the shape and size of
   the robot platform being used (in this case, we define a rectangular footprint). This footprint is what allows the navigation
@@ -82,6 +82,7 @@ $ cd ~/subt_hello_world/docker/simulation_runner
 $ ./run.bash osrf/subt-virtual-testbed:latest cave_circuit.ign worldName:=cave_qual robotName1:=X1 robotConfig1:=COSTAR_HUSKY_SENSOR_CONFIG_1
 
 # Run the navigation stack in a solution container
+$ cd ~/subt_hello_world/docker
 $ ./run_dev_container.bash ~/subt_hello_world/subt_solution_launch
 $ source ~/setup_solution_ws.bash
 $ roslaunch subt_solution_launch navigation.launch name:=X1
@@ -125,7 +126,7 @@ _Some of the dynamically reconfigurable parameters for `DWAPlannerROS`._
 
 The configuration parameters that come with this blog post are a reasonable
 starting point, but are not optimal. For more
-guidance on parameter tuning, we recommend taking a look at the [ROS Navigation Tuning Guide](http://kaiyuzheng.me/documents/navguide.pdf). 
+guidance on parameter tuning, we recommend taking a look at the [ROS Navigation Tuning Guide](http://kaiyuzheng.me/documents/navguide.pdf).
 You can come back to this step to tune the parameters after sending a navigation goal (the last step in this post).
 
 ## Limitations of `move_base`
@@ -148,14 +149,14 @@ In order to use `move_base` in a complex environment, we wrote two new nodes to:
 * "Flatten" the `base_link` frame into a `fake` frame.
 This is accomplished by removing the roll, pitch, and z channels from the
 original `base_link` coordinate frame. The `move_base` package can use the new `fake` frame to determine the location of the robot with only the 2D components.
-The 2D frame is necessary because `move_base` only considers obstacles within 2m height from the origin of its 2D costmap. 
+The 2D frame is necessary because `move_base` only considers obstacles within 2m height from the origin of its 2D costmap.
 Now, if the robot goes up or down a hill, the obstacles seen by the robot will be interpreted as within the 2m height range in the costmap.
 * Filter the point cloud to differentiate between sloped terrain and obstacles in a 3D environment.
 
 The first node is straightforward, as it simply takes in a pose and
 strips off the rotation information. An example implementation
 can be found in:
-`subt_solution_launch/src/base_link_costmap_projector.cpp`. 
+`subt_solution_launch/src/base_link_costmap_projector.cpp`.
 
 The second node (`subt_solution_launch/src/pc_filter.cpp`) has some more
 involved filtering of the point cloud. The goal of this node is to discern
@@ -212,7 +213,7 @@ the local plan, while the green curve represents the global plan._
 You now have a robot that can perform local navigation through a 3D
 environment. While this technique allows the robot to plan paths, it certainly has
 limitations, and a good next step is to search for alternatives or continue refine the parameters and
-filtering strategies to improve the robot's capabilities. 
+filtering strategies to improve the robot's capabilities.
 You can also check out [this tutorial](http://wiki.ros.org/navigation/Tutorials/SendingSimpleGoals) to learn how to send waypoints programmatically instead of manually through RViz.
 This can be used to expand the robot's navigation into a fully autonomous solution.
 

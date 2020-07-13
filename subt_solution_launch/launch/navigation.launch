@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launch>
+  <!-- The name/namespace of this robot -->
+  <arg name="name"/>
+
+  <group ns="$(arg name)">
+    <!-- Cartographer setup -->
+    <include file="$(find subt_solution_launch)/launch/cartographer.launch">
+      <arg name="name" value="$(arg name)"/>
+      <arg name="mode" value="3d"/>
+      <arg name="type" value="x1"/>
+    </include>
+
+    <node pkg="subt_solution_launch" type="base_link_flattener" name="base_link_flattener">
+      <param name="name" value="$(arg name)"/>
+    </node>
+
+    <!-- static transform publisher setup for the "flattened" sensor frame -->
+    <node pkg="tf" type="static_transform_publisher" name="sensor_frame_broadcaster"
+      args="0 0 0.27 0 0 0 $(arg name)/fake $(arg name)/fake/sensor_fake 100" />
+
+    <node pkg="subt_solution_launch" type="point_cloud_filter" name="pc_filter">
+      <param name="name" value="$(arg name)"/>
+      <param name="flat_height" value="-0.25"/>
+      <param name="slope" value="0.7"/>
+    </node>
+
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base">
+      <param name="base_global_planner" value="navfn/NavfnROS"/>
+      <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+      <rosparam file="$(find subt_solution_launch)/config/move_base/planner.yaml" command="load" />
+
+      <rosparam file="$(find subt_solution_launch)/config/move_base/costmap_common.yaml" command="load" ns="global_costmap" />
+      <rosparam file="$(find subt_solution_launch)/config/move_base/costmap_common.yaml" command="load" ns="local_costmap" />
+      <rosparam file="$(find subt_solution_launch)/config/move_base/costmap_local.yaml" command="load" ns="local_costmap" />
+      <rosparam file="$(find subt_solution_launch)/config/move_base/costmap_global.yaml" command="load" ns="global_costmap" />
+    </node>
+  </group>
+</launch>

@@ -2,7 +2,7 @@
 <package format="2">
   <name>subt_solution_launch</name>
   <version>0.0.1</version>
-  <description>Launch/bringup files for Open Robotics SubT Solution</description>
+  <description>Launch/bringup files for SubT Solution</description>
 
   <maintainer email="michael@openrobotics.org">Michael Carroll</maintainer>
 
@@ -24,4 +24,8 @@
   <depend>subt_ign</depend>
   <depend>subt_msgs</depend>
   <depend>tf2_ros</depend>
+  <depend>move_base</depend>
+  <depend>dwa_local_planner</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>tf2_sensor_msgs</depend>
 </package>

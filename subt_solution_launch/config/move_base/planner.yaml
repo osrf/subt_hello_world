@@ -1,0 +1,30 @@
+controller_frequency: 5.0
+recovery_behaviour_enabled: true
+
+NavfnROS:
+  allow_unknown: true # Specifies whether or not to allow navfn to create plans that traverse unknown space.
+  default_tolerance: 0.1 # A tolerance on the goal point for the planner.
+
+DWAPlannerROS:
+  # forward simulation
+  sim time: 4.0
+
+  # Robot configuration parameters
+  acc_lim_x: 2.5
+  acc_lim_y: 0
+  acc_lim_th: 3.2
+
+  max_vel_x: 0.5
+  min_vel_x: 0.0
+  max_vel_y: 0
+  min_vel_y: 0
+
+  max_vel_trans: 0.5
+  min_vel_trans: 0.1
+  max_vel_theta: 2.0
+  min_vel_theta: 0.2
+
+  # Goal Tolerance Parameters
+  yaw_goal_tolerance: 3.14
+  xy_goal_tolerance: 0.5
+  latch_xy_goal_tolerance: false

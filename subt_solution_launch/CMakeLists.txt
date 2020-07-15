@@ -13,6 +13,8 @@ find_package(catkin REQUIRED COMPONENTS
   subt_ign
   subt_msgs
   tf2_ros
+  tf2_geometry_msgs
+  tf2_sensor_msgs
 )
 
 find_package(Boost REQUIRED)
@@ -37,6 +39,14 @@ add_executable(artifact_reporter
   src/artifact_reporter.cpp
 )
 
+add_executable(base_link_flattener
+  src/base_link_costmap_projector.cpp
+)
+
+add_executable(point_cloud_filter
+  src/pc_filter.cpp
+)
+
 target_link_libraries(artifact_origin_finder
   ${catkin_LIBRARIES}
   ignition-math${IGN_MATH_VER}::ignition-math${IGN_MATH_VER}
@@ -47,7 +57,19 @@ target_link_libraries(artifact_reporter
   ignition-msgs${IGN_MSGS_VER}::ignition-msgs${IGN_MSGS_VER}
 )
 
-install(TARGETS artifact_origin_finder artifact_reporter
+target_link_libraries(base_link_flattener
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(point_cloud_filter
+  ${catkin_LIBRARIES}
+)
+
+install(TARGETS
+  artifact_origin_finder
+  artifact_reporter
+  base_link_flattener
+  point_cloud_filter
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

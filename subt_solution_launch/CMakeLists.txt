@@ -47,6 +47,14 @@ add_executable(point_cloud_filter
   src/pc_filter.cpp
 )
 
+add_executable(artifact_reporter_comms
+  src/artifact_reporter_comms.cpp
+)
+
+add_executable(report_relay
+  src/report_relay.cpp
+)
+
 target_link_libraries(artifact_origin_finder
   ${catkin_LIBRARIES}
   ignition-math${IGN_MATH_VER}::ignition-math${IGN_MATH_VER}
@@ -65,11 +73,23 @@ target_link_libraries(point_cloud_filter
   ${catkin_LIBRARIES}
 )
 
+target_link_libraries(artifact_reporter_comms
+  ${catkin_LIBRARIES}
+  # ignition-msgs${IGN_MSGS_VER}::ignition-msgs${IGN_MSGS_VER}
+)
+
+target_link_libraries(report_relay
+  ${catkin_LIBRARIES}
+  # ignition-msgs${IGN_MSGS_VER}::ignition-msgs${IGN_MSGS_VER}
+)
+
 install(TARGETS
   artifact_origin_finder
   artifact_reporter
+  artifact_reporter_comms
   base_link_flattener
   point_cloud_filter
+  report_relay
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

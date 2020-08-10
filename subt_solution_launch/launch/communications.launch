@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <arg name="reporter_name"/>
+  <arg name="relay_name"/>
+
+  <group ns="$(arg reporter_name)">
+    <!-- Cartographer setup -->
+    <include file="$(find subt_solution_launch)/launch/cartographer.launch">
+      <arg name="name" value="$(arg reporter_name)"/>
+      <arg name="mode" value="3d"/>
+      <arg name="type" value="x1"/>
+    </include>
+
+    <node pkg="subt_solution_launch" type="artifact_origin_finder" name="artifact_origin_finder">
+      <param name="robot_name" value="$(arg reporter_name)" />
+    </node>
+
+    <node pkg="subt_solution_launch" type="artifact_reporter_comms" name="artifact_reporter_comms" output="screen">
+      <param name="robot_name" value="$(arg reporter_name)" />
+      <param name="destination_address" value="$(arg relay_name)" />
+    </node>
+  </group>
+
+  <include file="$(find subt_solution_launch)/launch/yolo_v3-tiny.launch" />
+
+  <node pkg="subt_solution_launch" type="report_relay" name="report_relay" output="screen">
+    <param name="robot_name" value="$(arg relay_name)"/>
+    <param name="other_robot" value="$(arg reporter_name)" />
+  </node>
+</launch>

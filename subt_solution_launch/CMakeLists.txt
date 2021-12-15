@@ -21,7 +21,7 @@ find_package(Boost REQUIRED)
 
 set(IGN_MATH_VER 6)
 find_package(ignition-math${IGN_MATH_VER} REQUIRED)
-set(IGN_MSGS_VER 4)
+set(IGN_MSGS_VER 6)
 find_package(ignition-msgs${IGN_MSGS_VER} REQUIRED)
 
 catkin_package()

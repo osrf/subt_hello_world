@@ -19,11 +19,13 @@ RUN echo 'Etc/UTC' > /etc/timezone && \
   && apt-get -qq clean
 
 # setup sources.list and keys
-RUN echo "deb http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros1-latest.list \
+RUN echo "deb [trusted=yes] http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros1-latest.list \
   && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
 # install ROS (including dependencies for building packages) and other packages
 RUN apt-get -qq update && apt-get -q -y install \
+  libpcl-dev \
+  libpcl-conversions-dev \
   build-essential \
   git \
   python-rosdep \
@@ -34,6 +36,7 @@ RUN apt-get -qq update && apt-get -q -y install \
   python3-colcon-common-extensions \
   ros-melodic-desktop \
   ros-melodic-teleop-twist-keyboard \
+  ros-melodic-pcl-ros \
   tmux \
   vim \
   wget \
@@ -44,12 +47,12 @@ RUN apt-get -qq update && apt-get -q -y install \
 # sdformat8-sdf conflicts with sdformat-sdf installed from gazebo
 # so we need to workaround this using a force overwrite
 # Do this before installing ign-gazebo
-# (then install ign-blueprint and ros to ign bridge)
+# (then install ign-dome and ros to ign bridge)
 RUN echo "deb [trusted=yes] http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list \
   && wget http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
   && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 \
   && apt-get -qq update && apt-get -q -y install \
-  ignition-blueprint \
+  ignition-dome \
   ros-melodic-ros-ign \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get -qq clean
@@ -93,7 +96,14 @@ RUN [ "/bin/bash" , "-c" , \
   "source /opt/ros/melodic/setup.bash \
   && sudo apt-get -qq update \
   && rosdep install --from-paths src --ignore-src -r -y \
-  && colcon build \
+    --skip-keys=ignition-transport9 \
+    --skip-keys=ignition-gazebo4 \
+    --skip-keys=ignition-math6 \
+    --skip-keys=ignition-msgs6 \
+    --skip-keys=ignition-plugin1 \
+    --skip-keys=ignition-common3 \
+    --skip-keys=ignition-launch3 \
+  && catkin_make  -DCMAKE_BUILD_TYPE=Release install \
   && sudo rm -rf /var/lib/apt/lists/* \
   && sudo apt-get -qq clean" ]
 

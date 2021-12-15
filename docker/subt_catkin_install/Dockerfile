@@ -28,7 +28,7 @@ RUN wget http://packages.osrfoundation.org/gazebo.key -O - | apt-key add -
 RUN apt-get update && apt-get -q -y install --no-install-recommends \
   build-essential \
   cmake \
-  ignition-blueprint \
+  ignition-dome \
   libusb-dev \
   lsb-release \
   pkg-config python \

@@ -471,11 +471,11 @@ Before we discuss how to use breadcrumbs as we drive the _reporter_ robot around
 ### Visualizing Communication Range
 
 There's a [tutorial](https://github.com/osrf/subt/wiki/Breadcrumbs-and-communication-visualization-tutorial) on the SubT Virtual Testbed Wiki that goes through how to visualize the communication range between two robots.
-In order to follow this tutorial, you need to install `ignition-citadel` (whereas `ignition-blueprint` is the backbone of the SubT Virtual Testbed for Cave Circuit).
+In order to follow this tutorial, you need to install `ignition-dome`.
 Since it takes a bit of work to get this tutorial working, we've gathered some example visualizations for you later in this tutorial.
 
 If you're interested in testing out communications visualization yourself, you'll need to use the files provided in `~/subt_hello_world/docker/subt_catkin_install`.
-This directory contains a Docker setup that allows you to follow the [Catkin Installation](https://github.com/osrf/subt/wiki/Catkin%20System%20Setup) instructions, which is needed in order to swap out `ignition-blueprint` with `ignition-citadel`.
+This directory contains a Docker setup that allows you to follow the [Catkin Installation](https://github.com/osrf/subt/wiki/Catkin%20System%20Setup) instructions.
 
 ### Using Breadcrumbs
 

@@ -110,6 +110,7 @@ Then, to execute the simulation environment, run:
 ```
 ./subt/docker/run.bash osrf/subt-virtual-testbed:latest \
    cave_circuit.ign \
+   circuit:=cave \
    worldName:=simple_cave_01 \
    robotName1:=X1 \
    robotConfig1:=X1_SENSOR_CONFIG_1
@@ -119,6 +120,7 @@ To expand on the arguments of this script:
 
 * `osrf/subt_virtual-testbed:latest` - the name/version of the container from [DockerHub](https://hub.docker.com/r/osrf/subt-virtual-testbed)
 * `cave_circuit.ign` - the Ignition-launch file for the cave simulation
+* `circuit` - the name of the competition event (tunnel, urban, cave, or finals)
 * `worldName` - the name of the world to launch (currently, there are three simple cave variants)
 * `robotName` - the name of the first robot performer in the team
 * `robotConfig` - the configuration of the first robot performer in the team (robots can be found on the [SubT Tech Repo](https://subtchallenge.world/openrobotics/fuel/collections/SubT%20Tech%20Repo) with details on the [Robot Wiki](https://github.com/osrf/subt/wiki/robots))

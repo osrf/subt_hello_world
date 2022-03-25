@@ -113,6 +113,7 @@ Let's use the [Husky](https://github.com/osrf/subt/wiki/Robots) robot since it h
 $ cd ~/subt_hello_world/docker/simulation_runner
 $ ./run.bash osrf/subt-virtual-testbed:latest \
    cave_circuit.ign \
+   circuit:=cave \
    worldName:=simple_cave_01 \
    robotName1:=X1 \
    robotConfig1:=COSTAR_HUSKY_SENSOR_CONFIG_1
@@ -576,6 +577,7 @@ First, start the SubT Simulator. Let's use the Husky robot again since it has a 
 $ cd ~/subt_hello_world/docker/simulation_runner
 $ ./run.bash osrf/subt-virtual-testbed:latest \
    cave_circuit.ign \
+   circuit:=cave \
    worldName:=simple_cave_01 \
    robotName1:=X1 \
    robotConfig1:=COSTAR_HUSKY_SENSOR_CONFIG_1

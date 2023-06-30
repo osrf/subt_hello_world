@@ -18,7 +18,6 @@ This repository holds a set of quick-start hello world tutorials for the DARPA S
 
 
 *Official SubT Resources*
-* [The SubT Virtual Portal](https://www.subtchallenge.world/)
 * [Full information regarding the DARPA SubT Challenge can be found here.](https://www.subtchallenge.com/)  
 * [The full SubT Virtual Testbed source code is available here](https://github.com/osrf/subt).
 * [Additional SubT Virtual Testbed tutorials](https://github.com/osrf/subt/wiki/Tutorials)

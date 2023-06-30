@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Now that the simple cave environments have been released, it is an excellent time to get started experimenting with the [DARPA Subterranean (SubT) Challenge Virtual Testbed](https://subtchallenge.world) and writing your own solution.
+Now that the simple cave environments have been released, it is an excellent time to get started experimenting with the [DARPA Subterranean (SubT) Challenge Virtual Testbed](https://github.com/osrf/subt/wiki) and writing your own solution.
 
 The SubT Virtual Testbed is based on the [Ignition Gazebo](https://ignitionrobotics.org) simulator.
 It allows competitors to simulate teams of robots in different subterranean environments.
@@ -121,7 +121,7 @@ To expand on the arguments of this script:
 * `cave_circuit.ign` - the Ignition-launch file for the cave simulation
 * `worldName` - the name of the world to launch (currently, there are three simple cave variants)
 * `robotName` - the name of the first robot performer in the team
-* `robotConfig` - the configuration of the first robot performer in the team (robots can be found on the [SubT Tech Repo](https://subtchallenge.world/openrobotics/fuel/collections/SubT%20Tech%20Repo) with details on the [Robot Wiki](https://github.com/osrf/subt/wiki/robots))
+* `robotConfig` - the configuration of the first robot performer in the team (robots can be found on the [SubT Tech Repo](https://app.gazebosim.org/openrobotics/fuel/collections/SubT%20Tech%20Repo) with details on the [Robot Wiki](https://github.com/osrf/subt/wiki/robots))
 
 Once the simulation environment is loaded, you should be presented with a window like this:
 
@@ -291,7 +291,7 @@ Note any packages installed in a docker container will need to be commited to en
 In this post, we have seen how to teleoperate a robot platform using the SubT Virtual Testbed and visualize some of the robot's sensor data.
 
 If you like to participate or explore more, here are some helpful resources:
-* [SubT Virtual Portal](https://subtchallenge.world/home): hosts competition information, registration, SubT Tech Repo, CloudSim submissions, and leaderboards
+* [SubT Challenge Website](https://subtchallenge.com/): hosts competition information, registration, and leaderboards
 * [SubT Virtual Testbed Repository](https://github.com/osrf/subt/wiki/Home): hosts source code for the testbed
 * [SubT API Wiki](https://github.com/osrf/subt/wiki/api): enumerates ROS topics and services in the SubT Virtual Testbed
 * [SubT Robot Wiki](https://github.com/osrf/subt/wiki/robots): enumerates the list of pre-made robot models in the SubT Tech Repo for the Virtual Competition

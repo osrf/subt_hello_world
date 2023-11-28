@@ -79,7 +79,7 @@ the costmaps in RViz, simply check the top level box in displays.
 ```
 # Start a simulator
 $ cd ~/subt_hello_world/docker/simulation_runner
-$ ./run.bash osrf/subt-virtual-testbed:latest cave_circuit.ign worldName:=cave_qual robotName1:=X1 robotConfig1:=COSTAR_HUSKY_SENSOR_CONFIG_1
+$ ./run.bash osrf/subt-virtual-testbed:latest cave_circuit.ign circuit:=cave worldName:=cave_qual robotName1:=X1 robotConfig1:=COSTAR_HUSKY_SENSOR_CONFIG_1
 
 # Run the navigation stack in a solution container
 $ cd ~/subt_hello_world/docker

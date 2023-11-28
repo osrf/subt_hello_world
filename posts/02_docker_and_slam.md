@@ -138,6 +138,7 @@ You can verify this by running the simulation environment and the solution conta
 $ cd ~/subt_hello_world/docker/simulation_runner
 $ ./run.bash osrf/subt-virtual-testbed:latest \
    cave_circuit.ign \
+   circuit:=cave \
    worldName:=simple_cave_01 \
    robotName1:=X1 \
    robotConfig1:=X1_SENSOR_CONFIG_3
@@ -342,6 +343,7 @@ $ ./build_dev_image.bash
 $ cd simulation_runner/
 $ ./run.bash osrf/subt-virtual-testbed:latest \
    cave_circuit.ign \
+   circuit:=cave \
    worldName:=simple_cave_01 \
    robotName1:=X1 \
    robotConfig1:=X1_SENSOR_CONFIG_3

@@ -36,7 +36,7 @@ First, start a simulation environment in the `cave_qual` world, using  a robot w
 
 ```
 $ cd ~/subt_hello_world/docker/simulation_runner
-$ ./run.bash osrf/subt-virtual-testbed:latest cave_circuit.ign worldName:=cave_qual robotName1:=X1 robotConfig1:=COSTAR_HUSKY_SENSOR_CONFIG_1
+$ ./run.bash osrf/subt-virtual-testbed:latest cave_circuit.ign circuit:=cave worldName:=cave_qual robotName1:=X1 robotConfig1:=COSTAR_HUSKY_SENSOR_CONFIG_1
 ```
 
 Now, let's run the `detect_and_report_artifacts.launch` file that was introduced in the [perception post](./03_perception.md).
@@ -392,7 +392,7 @@ In this example, we're using `COSTAR_HUSKY_SENSOR_CONFIG_2`:
 
 ```
 $ cd ~/subt_hello_world/docker/simulation_runner
-$ ./run.bash osrf/subt-virtual-testbed:latest cave_circuit.ign worldName:=cave_qual robotName1:=X1 robotConfig1:=COSTAR_HUSKY_SENSOR_CONFIG_2
+$ ./run.bash osrf/subt-virtual-testbed:latest cave_circuit.ign circuit:=cave worldName:=cave_qual robotName1:=X1 robotConfig1:=COSTAR_HUSKY_SENSOR_CONFIG_2
 ```
 
 In order to drop a breadcrumb, we need to publish a message the the `/ROBOT_NAME/breadcrumb/deploy` topic.
@@ -420,7 +420,7 @@ We'll need to start a simulator with **two** robots this time:
 
 ```
 $ cd ~/subt_hello_world/docker/simulation_runner
-$ ./run.bash osrf/subt-virtual-testbed:latest cave_circuit.ign worldName:=cave_qual robotName1:=X1 robotConfig1:=COSTAR_HUSKY_SENSOR_CONFIG_2 robotName2:=X2 robotConfig2:=X2_SENSOR_CONFIG_1
+$ ./run.bash osrf/subt-virtual-testbed:latest cave_circuit.ign circuit:=cave worldName:=cave_qual robotName1:=X1 robotConfig1:=COSTAR_HUSKY_SENSOR_CONFIG_2 robotName2:=X2 robotConfig2:=X2_SENSOR_CONFIG_1
 ```
 
 Once everything loads, you should see two robots in the starting area.

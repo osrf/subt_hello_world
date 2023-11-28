@@ -54,7 +54,7 @@ $ docker container kill <NAME_OF_CONTAINER>
 The `dev` and `entry` docker containers are not meant for running SubT simulation environments (these containers do not have the simulation models downloaded). The `osrf/subt-virtual-testbed` image is meant for this. You can run a container based on this image that will start a simulation environment:
 ```
 $ cd simulation_runner/
-$ ./run.bash osrf/subt-virtual-testbed cave_circuit.ign worldName:=simple_cave_01 robotName1:=X1 robotConfig1:=X1_SENSOR_CONFIG_3
+$ ./run.bash osrf/subt-virtual-testbed cave_circuit.ign circuit:=cave worldName:=simple_cave_01 robotName1:=X1 robotConfig1:=X1_SENSOR_CONFIG_3
 ```
 
 Now, in another terminal, start a container from the dev image to run things like SLAM or navigation:

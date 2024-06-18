@@ -11,6 +11,11 @@
 # https://github.com/NVIDIA/nvidia-docker/wiki/CUDA
 FROM nvidia/cudagl:10.1-devel-ubuntu18.04
 
+# Update NVidia key
+RUN (apt-get -qq update || true) \
+  && apt-get -q -y install curl \
+  && curl -fsSL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub | apt-key add -
+
 # setup timezone
 RUN echo 'Etc/UTC' > /etc/timezone && \
   ln -s /usr/share/zoneinfo/Etc/UTC /etc/localtime \
@@ -20,7 +25,7 @@ RUN echo 'Etc/UTC' > /etc/timezone && \
 
 # setup sources.list and keys
 RUN echo "deb [trusted=yes] http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros1-latest.list \
-  && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+  && curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 
 # install ROS (including dependencies for building packages) and other packages
 RUN apt-get -qq update && apt-get -q -y install \
@@ -50,7 +55,6 @@ RUN apt-get -qq update && apt-get -q -y install \
 # (then install ign-dome and ros to ign bridge)
 RUN echo "deb [trusted=yes] http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list \
   && wget http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
-  && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 \
   && apt-get -qq update && apt-get -q -y install \
   ignition-dome \
   ros-melodic-ros-ign \
@@ -71,7 +75,7 @@ RUN apt-get -qq update && apt-get -q -y install sudo \
 # Commands below run as the user $USERNAME
 USER ${USERNAME}
 
-RUN rosdep update
+RUN rosdep update --include-eol-distros
 
 # save filenames and paths as either args (for repreated use in this Dockerfile)
 # or environment variables (for use in other dockerfiles and/or container shell instances)
@@ -95,7 +99,7 @@ WORKDIR ${DEPS_WS_PATH}
 RUN [ "/bin/bash" , "-c" , \
   "source /opt/ros/melodic/setup.bash \
   && sudo apt-get -qq update \
-  && rosdep install --from-paths src --ignore-src -r -y \
+  && rosdep install --from-paths src --ignore-src -r -y --include-eol-distros \
     --skip-keys=ignition-transport9 \
     --skip-keys=ignition-gazebo4 \
     --skip-keys=ignition-math6 \
